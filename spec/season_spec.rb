@@ -43,4 +43,12 @@ RSpec.describe Season do
     end
   end
 
+  describe "fewest_tackles" do
+    it "can determine the team with the fewest tackles in a season" do
+      expect(@season.fewest_tackles(20122013)).to eq("New York City FC")
+      expect(@season.fewest_tackles(20132014)).to eq("New England Revolution")
+      expect(@season.fewest_tackles(20142015)).to eq("Houston Dynamo")
+    end
+  end
+
 end
