@@ -48,11 +48,11 @@ RSpec.describe League do
     end
 
     it "can give best offensive team" do 
-      expect(@league2.best_offence).to eq("8")
+      expect(@league2.best_offense).to eq("8")
     end
 
     it "can give worst offensive team" do
-      expect(@league2.worst_offence).to eq("28")
+      expect(@league2.worst_offense).to eq("28")
     end
   end
 end

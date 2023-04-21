@@ -37,7 +37,7 @@ class League
     games
   end
 
-  def best_offence
+  def best_offense
     offenses = {}
     total_goals_by_team.each do |team, goals|
       offenses[team] = goals.to_f / total_games_by_team[team]
@@ -46,7 +46,7 @@ class League
     offenses.key(best_average)
   end
 
-  def worst_offence
+  def worst_offense
     offenses = {}
     total_goals_by_team.each do |team, goals|
       offenses[team] = (goals.to_f / total_games_by_team[team]).round(2)
