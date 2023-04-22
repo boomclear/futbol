@@ -43,6 +43,21 @@ RSpec.describe Season do
     end
   end
 
+  describe "fewest_tackles" do
+    it "can determine the team with the fewest tackles in a season" do
+      expect(@season.fewest_tackles(20122013)).to eq("New York City FC")
+      expect(@season.fewest_tackles(20132014)).to eq("New England Revolution")
+      expect(@season.fewest_tackles(20142015)).to eq("Houston Dynamo")
+    end
+  end
+
+  describe "worst_coach" do 
+    it "can determine the worst coach (based on win percentage) for a season" do
+      expect(@season.worst_coach(20122013)).to eq("John Tortorella")
+      expect(@season.worst_coach(20132014)).to eq("Joel Quenneville")
+      expect(@season.worst_coach(20142015)).to eq("Paul Maurice")
+    end
+  end
 
   describe "team accuracy" do
     it "returns most accurate team" do
