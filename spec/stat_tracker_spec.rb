@@ -84,4 +84,30 @@ RSpec.describe StatTracker do
   #   end
   # end
 
+  describe "team amount" do
+    it "can count the number of teams" do 
+      @stat_tracker.count_of_teams
+    end
+  end
+  describe "team offenses and total games" do
+    it "can give total games by team" do 
+      @stat_tracker.total_games_by_team
+    end
+
+    it "can give best offensive team" do 
+      @stat_tracker.best_offense
+    end
+
+    it "can give worst offensive team" do
+      @stat_tracker.worst_offense
+    end
+  end
+  
+  describe "team id to team names" do 
+    it "has a hash containing team ID keys and team name values" do 
+      @stat_tracker.team_id_to_team_name
+    end
+  end
+  
+
 end
