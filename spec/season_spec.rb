@@ -51,4 +51,13 @@ RSpec.describe Season do
       expect(@season.least_accurate_team(20122013)).to eq("Seattle Sounders FC")
     end
   end
+  
+  describe "winningest coach" do
+    it "returns most accurate team" do
+      @season.coach_record(20122013)
+      require 'pry'; binding.pry
+      expect(@season.winningest_coach(20122013)).to eq("Claude Julien")
+    end
+  end
+
 end
