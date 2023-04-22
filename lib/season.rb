@@ -51,8 +51,7 @@ class Season
   end
   
   def most_accurate_team(season)
-    teams = CSV.read('./data_dummy/teams_dummy.csv', headers: true, header_converters: :symbol)
-    teams.each do |team|
+    @teams_data.each do |team|
       if team[:team_id] == @team_accuracies.key(@team_accuracies.values.max)
         return name = team[:teamname]
       end
@@ -60,8 +59,7 @@ class Season
   end
   
   def least_accurate_team(season)
-    teams = CSV.read('./data_dummy/teams_dummy.csv', headers: true, header_converters: :symbol)
-    teams.each do |team|
+    @teams_data.each do |team|
       if team[:team_id] == @team_accuracies.key(@team_accuracies.values.min)
         return name = team[:teamname]
       end

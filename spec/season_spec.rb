@@ -20,7 +20,7 @@ RSpec.describe Season do
       season_2012 = @season.create_season(20122013)
       season_2013 = @season.create_season(20132014)
       season_2014 = @season.create_season(20142015)
-      # expect(season_2012.first[:team_id]).to eq("3")
+      expect(season_2012.first[:team_id]).to eq("3")
       expect(season_2012.last[:result]).to eq("WIN")
       expect(season_2013.first[:shots]).to eq("5")
       expect(season_2014.first[:tackles]).to eq("61")

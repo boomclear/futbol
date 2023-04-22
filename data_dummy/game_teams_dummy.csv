@@ -1,5 +1,5 @@
 game_id,team_id,HoA,result,settled_in,head_coach,goals,shots,tackles,pim,powerPlayOpportunities,powerPlayGoals,faceOffWinPercentage,giveaways,takeaways
-e2012030221,3,away,LOSS,OT,John Tortorella,2,8,44,8,3,0,44.8,17,7
+2012030221,3,away,LOSS,OT,John Tortorella,2,8,44,8,3,0,44.8,17,7
 2012030221,6,home,WIN,OT,Claude Julien,3,12,51,6,4,1,55.2,4,5
 2012030312,5,home,LOSS,REG,Dan Bylsma,1,6,37,4,2,0,49.1,12,5
 2012030231,17,away,LOSS,REG,Mike Babcock,1,5,43,10,3,0,52.5,6,4
