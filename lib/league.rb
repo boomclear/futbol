@@ -33,9 +33,9 @@ class League
     games = {}
     @games_teams_data.each do |game|
       if !games[game[:team_id]]
-       games[game[:team_id]] = 1
+        games[game[:team_id]] = 1
       else
-       games[game[:team_id]] += 1
+        games[game[:team_id]] += 1
       end
     end
     games
@@ -67,10 +67,41 @@ class League
     teams
   end
 
-
+  def team_goals_home
+    home = Hash.new(0)
+    @games_teams_data.each do |game|
+      if game[:HoA] == "home"
+        home[game[:team_id]] += game[:goals].to_i
+      end
+    end
+    home
+  end
   
+  def team_goals_away
+    away = Hash.new(0)
+    @games_teams_data.each do |game|
+      if game[:HoA] == "away"
+        away[game[:team_id]] += game[:goals].to_i
+      end
+    end
+    away
+  end
 
-#   highest_scoring_visitor 	Name of the team with the highest average score per game across all seasons when they are away. 	String
-# highest_scoring_home_team 	Name of the team with the highest average score per game across all seasons when they are home. 	String
-
+  def highest_scoring_home_team
+    home_team = {}
+    team_goals_home.each do |team, goals|
+      home[team] = goals.to_f
+    end
+    best_home_score = home.values.max
+    team_id_to_team_name[home_team.key(best_average)]
+  end
+  
+  def highest_scoring_visitor
+    away_team = {}
+    team_goals_away.each do |team, goals|
+      away[team] = goals.to_f
+    end
+    best_away_score = away.values.max
+    team_id_to_team_name[away_team.key(best_average)]
+  end
 end

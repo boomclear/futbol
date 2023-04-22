@@ -89,4 +89,10 @@ RSpec.describe League do
       expect(@league.team_id_to_team_name).to eq(expected)
     end
   end
+
+  it "can find highest home scorer" do 
+    expect(@league.highest_scoring_home_team).to eq("New York Red Bulls")
+  end
+
+
 end
