@@ -37,4 +37,33 @@ class Season
     get_team_name(team_most_tackles_id[0])
   end
 
+  def team_accuracy(season)
+    team_shots_total = Hash.new(0)
+    team_goals_total = Hash.new(0)
+    @team_accuracies = Hash.new
+    create_season(season).each do |row|
+      shots = team_shots_total[row[:team_id]] += row[:shots].to_i
+      goals = team_goals_total[row[:team_id]] += row[:goals].to_i
+      team_accuracy = goals / shots.to_f
+      team_id = row[:team_id]
+      @team_accuracies[team_id] = team_accuracy
+    end
+  end
+  
+  def most_accurate_team(season)
+    @teams_data.each do |team|
+      if team[:team_id] == @team_accuracies.key(@team_accuracies.values.max)
+        return name = team[:teamname]
+      end
+    end
+  end
+  
+  def least_accurate_team(season)
+    @teams_data.each do |team|
+      if team[:team_id] == @team_accuracies.key(@team_accuracies.values.min)
+        return name = team[:teamname]
+      end
+    end
+  end
+
 end
