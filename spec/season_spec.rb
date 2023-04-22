@@ -58,4 +58,12 @@ RSpec.describe Season do
       expect(@season.worst_coach(20142015)).to eq("Paul Maurice")
     end
   end
+
+  describe "team accuracy" do
+    it "returns most accurate team" do
+      expect(@season.team_accuracy(20122013))
+      expect(@season.most_accurate_team(20122013)).to eq("New York Red Bulls")
+      expect(@season.least_accurate_team(20122013)).to eq("Seattle Sounders FC")
+    end
+  end
 end
