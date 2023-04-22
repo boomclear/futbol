@@ -51,4 +51,11 @@ RSpec.describe Season do
     end
   end
 
+  describe "worst_coach" do 
+    it "can determine the worst coach (based on win percentage) for a season" do
+      expect(@season.worst_coach(20122013)).to eq("John Tortorella")
+      expect(@season.worst_coach(20132014)).to eq("Joel Quenneville")
+      expect(@season.worst_coach(20142015)).to eq("Paul Maurice")
+    end
+  end
 end
