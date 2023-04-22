@@ -45,3 +45,17 @@ GitHub - https://github.com/Jesse193
 ### Blaine Glasgow
 LinkedIn - https://www.linkedin.com/in/blaine-glasgow-134a9017a/
 GitHub - https://github.com/GlowMunch
+
+
+## Retro
+Jamboard we used to organize our thoughts: https://jamboard.google.com/d/1FqUzVNPRLoVg4FYs8RlmsJJR4zOxpJufAS5KCavODds/edit?usp=sharing
+
+### Top 3 Things That Went Well
+- Communications between member of the team. Verbal and messaging
+- Daily Stand up and group meetings
+- Method testing 
+
+### Top 3 Things We Would Change
+- Being more thorough with our git workflow standardizing
+- Spend more time in code design planning before jumping into coding
+- Spend more time condiering what methods go together and have shared helper methods
