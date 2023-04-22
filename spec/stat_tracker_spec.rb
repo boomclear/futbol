@@ -20,4 +20,68 @@ RSpec.describe StatTracker do
     end
   end
 
+  describe "high scores" do
+    it "highest score" do
+      @stat_tracker.highest_total_score
+    end
+  end
+  describe "low scores" do
+    it "lowest score" do
+      @stat_tracker.lowest_total_score
+    end
+  end
+  describe "percentage home wins" do
+    it "percentage home wins" do
+      @stat_tracker.percentage_home_wins
+    end
+  end
+  describe "percentage visitor wins" do
+    it "percentage visitor wins" do
+      @stat_tracker.percentage_visitor_wins
+    end
+  end
+
+  describe "percentage ties" do
+    it "percentage ties" do
+      @stat_tracker.percentage_ties
+    end
+  end
+  describe "count of games" do
+    it "count of games" do
+      @stat_tracker.count_of_games_by_season
+    end
+  end
+
+  describe "average goals" do
+    it "average goals" do
+      @stat_tracker.average_goals_per_game
+      @stat_tracker.average_goals_by_season
+    end
+  end
+
+  describe "most accurate team" do
+    it "most accurate team" do
+      @stat_tracker.team_accuracy(20132014)
+      @stat_tracker.most_accurate_team(20132014)
+    end
+  end
+
+  describe "least accurate team" do
+    it "least accurate team" do
+      @stat_tracker.team_accuracy(20132014)
+      @stat_tracker.least_accurate_team(20132014)
+    end
+  end
+
+  describe "most tackles" do
+    it "most tackles" do
+      @stat_tracker.most_tackles(20132014)
+    end
+  end
+  # describe "least tackels" do
+  #   it "least tackles" do
+     
+  #   end
+  # end
+
 end
