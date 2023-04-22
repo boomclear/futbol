@@ -2,17 +2,11 @@ require './spec_helper'
 
 RSpec.describe League do
   before(:each) do
-    game_path = './data_dummy/games_dummy.csv'
-    games_data = CSV.read(game_path, headers: true, header_converters: :symbol)
-    @league = League.new(games_data)
+    games_data = CSV.read('./data_dummy/games_dummy.csv', headers: true, header_converters: :symbol)
+    games_teams_data = CSV.read('./data_dummy/game_teams_dummy.csv', headers: true, header_converters: :symbol)
+    teams_data = CSV.read('./data_dummy/teams_dummy.csv', headers: true, header_converters: :symbol)
 
-    game_teams_path = './data_dummy/game_teams_dummy.csv'
-    games_teams_data = CSV.read(game_teams_path, headers: true, header_converters: :symbol)
-    @league2 = League.new(games_teams_data)
-
-    teams_path = './data_dummy/teams_dummy.csv'
-    teams_data = CSV.read(teams_path, headers: true, header_converters: :symbol)
-    @league3 = League.new(teams_data)
+    @league = League.new(games_data, games_teams_data, teams_data)
   end
 
   describe "initialize" do
@@ -23,7 +17,7 @@ RSpec.describe League do
 
   describe "team amount" do
     it "can count the number of teams" do 
-      expect(@league2.count_of_teams).to eq(14)
+      expect(@league.count_of_teams).to eq(14)
     end
   end
   describe "team offenses and total games" do
@@ -44,15 +38,15 @@ RSpec.describe League do
         "52"=>1,
         "28"=>1
       }
-      expect(@league2.total_games_by_team).to eq(expected)
+      expect(@league.total_games_by_team).to eq(expected)
     end
 
     it "can give best offensive team" do 
-      expect(@league2.best_offense).to eq("8")
+      expect(@league.best_offense).to eq("New York Red Bulls")
     end
 
     it "can give worst offensive team" do
-      expect(@league2.worst_offense).to eq("28")
+      expect(@league.worst_offense).to eq("Los Angeles FC")
     end
   end
 end

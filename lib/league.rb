@@ -1,13 +1,17 @@
 class League 
-  attr_reader :league_data
-  
-  def initialize(data)
-    @league_data = data
+  attr_reader :games_data,
+              :game_teams_data,
+              :teams_data
+
+  def initialize(games_data, games_teams_data, teams_data)
+    @games_data = games_data
+    @games_teams_data = games_teams_data
+    @teams_data = teams_data
   end
   
   def count_of_teams
     teams = []
-    @league_data.each do |game|
+    @games_teams_data.each do |game|
       teams << game[:team_id]
     end
     teams.uniq.length
@@ -15,7 +19,7 @@ class League
 
   def total_goals_by_team
     goals = {}
-    @league_data.each do |game|
+    @games_teams_data.each do |game|
       if !goals[game[:team_id]]
         goals[game[:team_id]] = game[:goals].to_i
       else
@@ -27,7 +31,7 @@ class League
 
   def total_games_by_team
     games = {}
-    @league_data.each do |game|
+    @games_teams_data.each do |game|
       if !games[game[:team_id]]
        games[game[:team_id]] = 1
       else
@@ -43,7 +47,7 @@ class League
       offenses[team] = goals.to_f / total_games_by_team[team]
     end
     best_average = offenses.values.max
-    offenses.key(best_average)
+    team_id_to_team_name[offenses.key(best_average)]
   end
 
   def worst_offense
@@ -52,7 +56,18 @@ class League
       offenses[team] = (goals.to_f / total_games_by_team[team]).round(2)
     end
     best_average = offenses.values.min
-    offenses.key(best_average)
+    team_id_to_team_name[offenses.key(best_average)]
   end
+
+  def team_id_to_team_name
+    teams = {}
+    @teams_data.each do |team|
+      teams[team[:team_id]] = team[:teamname]
+    end
+    teams
+  end
+
+
+  
 
 end
