@@ -40,7 +40,7 @@ class League
     end
     games
   end
-
+  
   def best_offense
     offenses = {}
     total_goals_by_team.each do |team, goals|
@@ -49,7 +49,7 @@ class League
     best_average = offenses.values.max
     team_id_to_team_name[offenses.key(best_average)]
   end
-
+  
   def worst_offense
     offenses = {}
     total_goals_by_team.each do |team, goals|
@@ -58,7 +58,7 @@ class League
     best_average = offenses.values.min
     team_id_to_team_name[offenses.key(best_average)]
   end
-
+  
   def team_id_to_team_name
     teams = {}
     @teams_data.each do |team|
@@ -66,42 +66,122 @@ class League
     end
     teams
   end
-
-  def team_goals_home
-    home = Hash.new(0)
+  
+  
+  
+  
+  
+  
+  
+  def total_home_games_by_team
+    home_games = {}
     @games_teams_data.each do |game|
       if game[:HoA] == "home"
-        home[game[:team_id]] += game[:goals].to_i
+        if !games[game[:team_id]]
+          games[game[:team_id]] = 1
+        else
+          games[game[:team_id]] += 1
+        end
       end
     end
-    home
+    home_games
   end
   
-  def team_goals_away
-    away = Hash.new(0)
+  def total_away_games_by_team
+    away_games = {}
     @games_teams_data.each do |game|
       if game[:HoA] == "away"
-        away[game[:team_id]] += game[:goals].to_i
+        if !games[game[:team_id]]
+          games[game[:team_id]] = 1
+        else
+          games[game[:team_id]] += 1
+        end
       end
     end
-    away
+    away_games
   end
 
-  def highest_scoring_home_team
-    home_team = {}
-    team_goals_home.each do |team, goals|
-      home[team] = goals.to_f
+  def total_home_goals_by_team
+    home_goals = {}
+    @games_teams_data.each do |game|
+      if game[:HoA] == "home"
+        if !goals[game[:team_id]]
+          goals[game[:team_id]] = game[:goals].to_i
+        else
+          goals[game[:team_id]] += game[:goals].to_i
+        end
+      end
     end
-    best_home_score = home.values.max
-    team_id_to_team_name[home_team.key(best_average)]
+    home_goals
   end
   
-  def highest_scoring_visitor
-    away_team = {}
-    team_goals_away.each do |team, goals|
-      away[team] = goals.to_f
+  def total_away_goals_by_team
+    away_goals = {}
+    @games_teams_data.each do |game|
+      if game[:HoA] == "away"
+        if !goals[game[:team_id]]
+          goals[game[:team_id]] = game[:goals].to_i
+        else
+          goals[game[:team_id]] += game[:goals].to_i
+        end
+      end
     end
-    best_away_score = away.values.max
-    team_id_to_team_name[away_team.key(best_average)]
+    away_goals
   end
+  
+  
+  # def team_goals_home
+  #   goals = Hash.new(0)
+  #   games = Hash.new(0)
+    
+  #   @games_teams_data.each do |game|
+  #     if game[:HoA] == "home"
+  #       goals[game[:team_id]] += game[:goals].to_i
+  #       games[game[:team_id]] += 1
+  #     else
+  #       games[game[:team_id]] += 1
+  #     end
+  #   end
+  #   average_home_score = calculate_percentage(games, goals)
+  #   average_home_score
+  # end
+
+  # def calculate_percentage(sample, total)
+  #   percentage = Hash.new(0)
+
+  #   total.each do |key, value|
+  #     output1 = sample[key] || 0
+  #     percentage = (output1.to_f / value.to_f) * 100
+  #     percentage[key] = percentage.round(2)
+  #   end
+  #   percentage
+  # end
+  
+  # def team_goals_away
+  #   away = Hash.new(0)
+  #   @games_teams_data.each do |game|
+  #     if game[:HoA] == "away"
+  #         away[game[:team_id]] += game[:goals].to_i
+      
+  #   end
+  #   away.
+  # end
+
+  # def highest_scoring_home_team
+  #   home_team = {}
+  #   team_goals_home.each do |team, goals|
+  #     home[team] = goals.to_f
+  #   end
+  #   best_home_score = home.values.max
+  #   team_id_to_team_name[home_team.key(best_average)]
+  # end
+  
+  # def highest_scoring_visitor
+  #   away_team = {}
+  #   team_goals_away.each do |team, goals|
+  #     away[team] = goals.to_f
+  #   end
+  #   best_away_score = away.values.max
+  #   team_id_to_team_name[away_team.key(best_average)]
+  # end
 end

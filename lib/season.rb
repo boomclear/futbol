@@ -98,28 +98,21 @@ class Season
       end
     end
   end
-  
-  def coach_record(season)
-    coach_wins = Hash.new(0)
-    coach_losses = Hash.new(0)
-    @coach_record = Hash.new
-    create_season(season).each do |row|
-      if row[:result] == "WIN"
-        wins = coach_wins[row[:head_coach]] += 1
-      # elsif row[:result] == "LOSS"
-      #   losses = coach_losses[row[:head_coach]] += 1
-      # end
-      win_percentage = wins.to_f /
-      head_coach = row[:head_coach]
-      @coach_record[head_coach] = win_percentage
-    end
-  end
 
-  def winningest_coach(season)
-    @games_teams_data.each do |coach|
-      if coach[:head_coach] == @coach_record.key(@coach_record.values.max)
-        return coach = coach[:head_coach]
-      end
+  def best_coach(season)
+    num_games_coached = Hash.new(0)
+    num_games_won = Hash.new(0)
+
+    create_season(season).each do |row|
+      num_games_coached[row[:head_coach]] += 1
+      num_games_won[row[:head_coach]] +=1 if row[:result] == "WIN"
     end
+
+    win_percentage = calculate_win_percentage(num_games_won, num_games_coached)
+
+    best_coach = win_percentage.max_by do |coach, win_percent|
+      win_percent
+    end
+    best_coach[0]
   end
 end

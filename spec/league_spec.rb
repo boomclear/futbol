@@ -91,6 +91,7 @@ RSpec.describe League do
   end
 
   it "can find highest home scorer" do 
+    require 'pry'; binding.pry
     expect(@league.highest_scoring_home_team).to eq("New York Red Bulls")
   end
 
