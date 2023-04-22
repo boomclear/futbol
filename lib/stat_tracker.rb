@@ -65,18 +65,6 @@ class StatTracker
     total = ties.to_f / games
     total.round(2)
   end
-  # def percentage_ties
-  #   games = 0
-  #   ties = 0
-  #   @game_teams_data.each do |row|
-  #     if row[:away_goals].to_i == row[:home_goals].to_i
-  #       ties += 1
-  #     elsif row[:away_goals].to_i != row[:home_goals].to_i
-  #       games += 1
-  #     end
-  #   end
-  #   ties.to_f / (games + ties)
-  # end
 
   def count_of_games_by_season
     games_by_season = {}
