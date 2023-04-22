@@ -86,7 +86,6 @@ RSpec.describe League do
         "22"=>"Washington Spirit FC",
         "53"=>"Columbus Crew SC"
       }
-      require 'pry'; binding.pry
       expect(@league.team_id_to_team_name).to eq(expected)
     end
   end
