@@ -67,20 +67,14 @@ class League
     teams
   end
   
-  
-  
-  
-  
-  
-  
   def total_home_games_by_team
     home_games = {}
     @games_teams_data.each do |game|
-      if game[:HoA] == "home"
-        if !games[game[:team_id]]
-          games[game[:team_id]] = 1
+      if game[:hoa] == "home"
+        if !home_games[game[:team_id]]
+          home_games[game[:team_id]] = 1
         else
-          games[game[:team_id]] += 1
+          home_games[game[:team_id]] += 1
         end
       end
     end
@@ -90,11 +84,11 @@ class League
   def total_away_games_by_team
     away_games = {}
     @games_teams_data.each do |game|
-      if game[:HoA] == "away"
-        if !games[game[:team_id]]
-          games[game[:team_id]] = 1
+      if game[:hoa] == "away"
+        if !away_games[game[:team_id]]
+          away_games[game[:team_id]] = 1
         else
-          games[game[:team_id]] += 1
+          away_games[game[:team_id]] += 1
         end
       end
     end
@@ -104,11 +98,11 @@ class League
   def total_home_goals_by_team
     home_goals = {}
     @games_teams_data.each do |game|
-      if game[:HoA] == "home"
-        if !goals[game[:team_id]]
-          goals[game[:team_id]] = game[:goals].to_i
+      if game[:hoa] == "home"
+        if !home_goals[game[:team_id]]
+          home_goals[game[:team_id]] = game[:goals].to_i
         else
-          goals[game[:team_id]] += game[:goals].to_i
+          home_goals[game[:team_id]] += game[:goals].to_i
         end
       end
     end
@@ -118,17 +112,38 @@ class League
   def total_away_goals_by_team
     away_goals = {}
     @games_teams_data.each do |game|
-      if game[:HoA] == "away"
-        if !goals[game[:team_id]]
-          goals[game[:team_id]] = game[:goals].to_i
+      if game[:hoa] == "away"
+        if !away_goals[game[:team_id]]
+          away_goals[game[:team_id]] = game[:goals].to_i
         else
-          goals[game[:team_id]] += game[:goals].to_i
+          away_goals[game[:team_id]] += game[:goals].to_i
         end
       end
     end
     away_goals
   end
+
+  def calculate_home_goals_average
+    goal_avg = Hash.new(0)
+
+    total_home_games_by_team.each do |team, games|
+      goals = total_home_goals_by_team[team] || 0
+      avg = (goals.to_f / games.to_f)
+      goal_avg[team] = avg.round(2)
+    end
+    goal_avg.max
+  end
   
+  def calculate_away_goals_average
+    goal_avg = Hash.new(0)
+
+    total_away_games_by_team.each do |team, games|
+      goals = total_away_goals_by_team[team] || 0
+      avg = (goals.to_f / games.to_f)
+      goal_avg[team] = avg.round(2)
+    end
+    goal_avg.max
+  end
   
   # def team_goals_home
   #   goals = Hash.new(0)
