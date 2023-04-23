@@ -99,7 +99,7 @@ class Season
     end
   end
 
-  def best_coach(season)
+  def winningest_coach(season)
     num_games_coached = Hash.new(0)
     num_games_won = Hash.new(0)
 
