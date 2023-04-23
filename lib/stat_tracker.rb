@@ -188,9 +188,9 @@ class StatTracker
     games = {}
     @game_teams_data.each do |game|
       if !games[game[:team_id]]
-       games[game[:team_id]] = 1
+        games[game[:team_id]] = 1
       else
-       games[game[:team_id]] += 1
+        games[game[:team_id]] += 1
       end
     end
     games
