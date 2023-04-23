@@ -67,7 +67,6 @@ class League
     teams
   end
 
-  # helper
   def total_games_by_team_hoa(status)
     games = {}
     @games_teams_data.each do |game|
@@ -82,7 +81,6 @@ class League
     games
   end
 
-  #helper
   def total_goals_by_team_hoa(status)
     goals = {}
     @games_teams_data.each do |game|
@@ -97,7 +95,6 @@ class League
     goals
   end
 
-  # calculate_home_goals_average
   def highest_scoring_home_team
     goal_avg = Hash.new(0)
 
@@ -110,8 +107,7 @@ class League
     goal_max = goal_avg.values.max
     team_id_to_team_name[goal_avg.key(goal_max)]
   end
-  
-  # calculate_away_goals_average
+
   def highest_scoring_visitor
     goal_avg = Hash.new(0)
 
@@ -125,7 +121,6 @@ class League
     team_id_to_team_name[goal_avg.key(goal_max)]
   end
   
-  # calculate_home_goals_average
   def lowest_scoring_home_team
     goal_avg = Hash.new(0)
 
@@ -138,8 +133,7 @@ class League
     goal_min = goal_avg.values.min
     team_id_to_team_name[goal_avg.key(goal_min)]
   end
-  
-  # calculate_away_goals_average
+
   def lowest_scoring_visitor
     goal_avg = Hash.new(0)
 
