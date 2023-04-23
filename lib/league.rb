@@ -131,7 +131,9 @@ class League
       avg = (goals.to_f / games.to_f)
       goal_avg[team] = avg.round(2)
     end
-    goal_avg.max
+    goal_avg
+    goal_max = goal_avg.values.max
+    team_id_to_team_name[goal_avg.key(goal_max)]
   end
   
   def calculate_away_goals_average
@@ -142,7 +144,10 @@ class League
       avg = (goals.to_f / games.to_f)
       goal_avg[team] = avg.round(2)
     end
-    goal_avg.max
+    goal_avg
+    goal_max = goal_avg.values.max
+    team_id_to_team_name[goal_avg.key(goal_max)]
+    
   end
   
   # def team_goals_home

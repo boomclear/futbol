@@ -91,15 +91,12 @@ RSpec.describe League do
   end
 
   it "can find highest home scorer" do 
-    # expect(@league.highest_scoring_home_team).to eq("New York Red Bulls")
-    # expect(@league.calculate_home_goals_percentage).to eq("new york")
-    # expect(@league.calculate_home_goals_percentage).to eq("new york")
-
     @league.total_home_games_by_team
     @league.total_away_games_by_team
     @league.total_home_goals_by_team
     @league.total_away_goals_by_team
-    @league.calculate_home_goals_percentage
+    @league.calculate_home_goals_average
+    @league.calculate_away_goals_average
 
 
   end
