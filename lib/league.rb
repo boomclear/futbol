@@ -66,73 +66,43 @@ class League
     end
     teams
   end
-  
-  # helper
-  def total_home_games_by_team
-    home_games = {}
-    @games_teams_data.each do |game|
-      if game[:hoa] == "home"
-        if !home_games[game[:team_id]]
-          home_games[game[:team_id]] = 1
-        else
-          home_games[game[:team_id]] += 1
-        end
-      end
-    end
-    home_games
-  end
 
   # helper
-  def total_away_games_by_team
-    away_games = {}
+  def total_games_by_team_hoa(status)
+    games = {}
     @games_teams_data.each do |game|
-      if game[:hoa] == "away"
-        if !away_games[game[:team_id]]
-          away_games[game[:team_id]] = 1
+      if game[:hoa] == status
+        if !games[game[:team_id]]
+          games[game[:team_id]] = 1
         else
-          away_games[game[:team_id]] += 1
+          games[game[:team_id]] += 1
         end
       end
     end
-    away_games
+    games
   end
 
   #helper
-  def total_home_goals_by_team
-    home_goals = {}
+  def total_goals_by_team_hoa(status)
+    goals = {}
     @games_teams_data.each do |game|
-      if game[:hoa] == "home"
-        if !home_goals[game[:team_id]]
-          home_goals[game[:team_id]] = game[:goals].to_i
+      if game[:hoa] == status
+        if !goals[game[:team_id]]
+          goals[game[:team_id]] = game[:goals].to_i
         else
-          home_goals[game[:team_id]] += game[:goals].to_i
+          goals[game[:team_id]] += game[:goals].to_i
         end
       end
     end
-    home_goals
-  end
-  
-  #helper
-  def total_away_goals_by_team
-    away_goals = {}
-    @games_teams_data.each do |game|
-      if game[:hoa] == "away"
-        if !away_goals[game[:team_id]]
-          away_goals[game[:team_id]] = game[:goals].to_i
-        else
-          away_goals[game[:team_id]] += game[:goals].to_i
-        end
-      end
-    end
-    away_goals
+    goals
   end
 
   # calculate_home_goals_average
   def highest_scoring_home_team
     goal_avg = Hash.new(0)
 
-    total_home_games_by_team.each do |team, games|
-      goals = total_home_goals_by_team[team] || 0
+    total_games_by_team_hoa("home").each do |team, games|
+      goals = total_goals_by_team_hoa("home")[team] || 0
       avg = (goals.to_f / games.to_f)
       goal_avg[team] = avg.round(2)
     end
@@ -145,8 +115,8 @@ class League
   def highest_scoring_visitor
     goal_avg = Hash.new(0)
 
-    total_away_games_by_team.each do |team, games|
-      goals = total_away_goals_by_team[team] || 0
+    total_games_by_team_hoa("away").each do |team, games|
+      goals = total_goals_by_team_hoa("away")[team] || 0
       avg = (goals.to_f / games.to_f)
       goal_avg[team] = avg.round(2)
     end
@@ -155,4 +125,31 @@ class League
     team_id_to_team_name[goal_avg.key(goal_max)]
   end
   
+  # calculate_home_goals_average
+  def lowest_scoring_home_team
+    goal_avg = Hash.new(0)
+
+    total_games_by_team_hoa("home").each do |team, games|
+      goals = total_goals_by_team_hoa("home")[team] || 0
+      avg = (goals.to_f / games.to_f)
+      goal_avg[team] = avg.round(2)
+    end
+    goal_avg
+    goal_min = goal_avg.values.min
+    team_id_to_team_name[goal_avg.key(goal_min)]
+  end
+  
+  # calculate_away_goals_average
+  def lowest_scoring_visitor
+    goal_avg = Hash.new(0)
+
+    total_games_by_team_hoa("away").each do |team, games|
+      goals = total_goals_by_team_hoa("away")[team] || 0
+      avg = (goals.to_f / games.to_f)
+      goal_avg[team] = avg.round(2)
+    end
+    goal_avg
+    goal_min = goal_avg.values.min
+    team_id_to_team_name[goal_avg.key(goal_min)]
+  end
 end

@@ -90,7 +90,7 @@ RSpec.describe League do
     end
   end
 
-  describe "Overall best scorers when home and away" do
+  describe "Overall highest and lowest scorers when home and away" do
       it "can find home games" do 
         home_games = {
         "16"=>3, 
@@ -102,7 +102,7 @@ RSpec.describe League do
         "6"=>2, 
         "8"=>1
       }
-      expect(@league.total_home_games_by_team).to eq(home_games)
+      expect(@league.total_games_by_team_hoa("home")).to eq(home_games)
     end
 
     it "can find home goals" do 
@@ -115,11 +115,15 @@ RSpec.describe League do
         "52"=>2, 
         "6"=>4, 
         "8"=>3}
-        expect(@league.total_home_goals_by_team).to eq(home_goals)
+        expect(@league.total_goals_by_team_hoa("home")).to eq(home_goals)
     end
 
     it "can find highest home goals/games average" do 
       expect(@league.highest_scoring_home_team).to eq("New York Red Bulls")
+    end
+    
+    it "can find lowest home goals/games average" do 
+      expect(@league.lowest_scoring_home_team).to eq("FC Dallas")
     end
 
     it "can find away games" do 
@@ -134,7 +138,7 @@ RSpec.describe League do
       "5"=>1, 
       "9"=>1
       }
-      expect(@league.total_away_games_by_team).to eq(away_games)
+      expect(@league.total_games_by_team_hoa("away")).to eq(away_games)
     end
 
     it "can find away goals" do 
@@ -148,11 +152,15 @@ RSpec.describe League do
       "30"=>1, 
       "5"=>0, 
       "9"=>2}
-      expect(@league.total_away_goals_by_team).to eq(away_goals)
+      expect(@league.total_goals_by_team_hoa("away")).to eq(away_goals)
     end
 
     it "can find highest away goals/games avg" do 
       expect(@league.highest_scoring_visitor).to eq("Houston Dynamo")
+    end
+
+    it "can find lowest away goals/games avg" do 
+      expect(@league.lowest_scoring_visitor).to eq("Los Angeles FC")
     end
   end
   
