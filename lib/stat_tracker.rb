@@ -4,7 +4,7 @@ require_relative "league"
 require_relative "season"
 
 class StatTracker
-  attr_reader :games_data, :teams_data, :game_teams_data, :game, :league, :season
+  attr_reader :games_data, :teams_data, :game_teams_data
 
   def initialize(locations)
     @games_data = CSV.read(locations[:games], headers: true, header_converters: :symbol)
@@ -12,8 +12,8 @@ class StatTracker
     @game_teams_data = CSV.read(locations[:game_teams], headers: true, header_converters: :symbol)
 
     @game = Game.new(@games_data)
-    @league = League.new(@games_data, @games_teams_data, @teams_data)
-    @season = Season.new(@games_data, @games_teams_data, @teams_data)
+    @league = League.new(@teams_data, @game_teams_data)
+    @season = Season.new(@teams_data, @game_teams_data)
   end
 
   def self.from_csv(location)

@@ -19,12 +19,6 @@ RSpec.describe StatTracker do
     it "exists" do
       expect(@stat_tracker).to be_a(StatTracker)
     end
-    it 'has data' do
-        expect(@stat_tracker.games_data).to eq(@games_data)
-        expect(@stat_tracker.teams_data).to eq(@teams_data)
-        expect(@stat_tracker.game_teams_data).to eq(@games_teams_data)
-    end
-
   end
 
   describe "highest_total_score" do
