@@ -66,4 +66,13 @@ RSpec.describe Season do
       expect(@season.least_accurate_team(20122013)).to eq("Seattle Sounders FC")
     end
   end
+  
+  describe "winningest coach" do
+    it "can determine the worst coach (based on win percentage) for a season" do
+      expect(@season.best_coach(20122013)).to eq("Claude Julien")
+      expect(@season.best_coach(20132014)).to eq("Joel Quenneville")
+      expect(@season.best_coach(20142015)).to eq("Alain Vigneault")
+    end
+  end
+
 end

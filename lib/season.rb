@@ -99,4 +99,20 @@ class Season
     end
   end
 
+  def best_coach(season)
+    num_games_coached = Hash.new(0)
+    num_games_won = Hash.new(0)
+
+    create_season(season).each do |row|
+      num_games_coached[row[:head_coach]] += 1
+      num_games_won[row[:head_coach]] +=1 if row[:result] == "WIN"
+    end
+
+    win_percentage = calculate_win_percentage(num_games_won, num_games_coached)
+
+    best_coach = win_percentage.max_by do |coach, win_percent|
+      win_percent
+    end
+    best_coach[0]
+  end
 end
