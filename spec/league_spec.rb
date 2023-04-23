@@ -6,7 +6,7 @@ RSpec.describe League do
     games_teams_data = CSV.read('./data_dummy/game_teams_dummy.csv', headers: true, header_converters: :symbol)
     teams_data = CSV.read('./data_dummy/teams_dummy.csv', headers: true, header_converters: :symbol)
 
-    @league = League.new(games_data, games_teams_data, teams_data)
+    @league = League.new(teams_data, games_teams_data)
   end
 
   describe "initialize" do

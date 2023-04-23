@@ -1,12 +1,10 @@
 class Season 
-  attr_reader :games_data,
-              :game_teams_data,
-              :teams_data
-  
-  def initialize(games_data, games_teams_data, teams_data)
-    @games_data = games_data
-    @games_teams_data = games_teams_data
+  attr_reader :teams_data, 
+              :game_teams_data
+
+  def initialize(teams_data, games_teams_data)
     @teams_data = teams_data
+    @games_teams_data = games_teams_data
   end
 
   def create_season(season)
@@ -73,19 +71,20 @@ class Season
   def team_accuracy(season)
     team_shots_total = Hash.new(0)
     team_goals_total = Hash.new(0)
-    @team_accuracies = Hash.new
+    team_accuracies = Hash.new
     create_season(season).each do |row|
       shots = team_shots_total[row[:team_id]] += row[:shots].to_i
       goals = team_goals_total[row[:team_id]] += row[:goals].to_i
       team_accuracy = goals / shots.to_f
       team_id = row[:team_id]
-      @team_accuracies[team_id] = team_accuracy
+      team_accuracies[team_id] = team_accuracy
     end
+    team_accuracies
   end
   
   def most_accurate_team(season)
     @teams_data.each do |team|
-      if team[:team_id] == @team_accuracies.key(@team_accuracies.values.max)
+      if team[:team_id] == team_accuracy(season).key(team_accuracy(season).values.max)
         return name = team[:teamname]
       end
     end
@@ -93,13 +92,13 @@ class Season
   
   def least_accurate_team(season)
     @teams_data.each do |team|
-      if team[:team_id] == @team_accuracies.key(@team_accuracies.values.min)
+      if team[:team_id] == team_accuracy(season).key(team_accuracy(season).values.min)
         return name = team[:teamname]
       end
     end
   end
 
-  def best_coach(season)
+  def winningest_coach(season)
     num_games_coached = Hash.new(0)
     num_games_won = Hash.new(0)
 

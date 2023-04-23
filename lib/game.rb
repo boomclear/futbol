@@ -24,26 +24,24 @@ class Game
     wins = 0
     @game_data.each do |game|
       game_count += 1
-      if (game[:hoa] == "home" && game[:result] == "WIN") || (game[:hoa] == "away" && game[:result] == "LOSS")
+      if game[:home_goals].to_i > game[:away_goals].to_i
         wins += 1
       end
     end
     percentage = wins / game_count.to_f
-    percentage = percentage * 100
     percentage = percentage.round(2)
   end
 
-  def percentage_away_wins
+  def percentage_visitor_wins
     game_count = 0
     wins = 0
     @game_data.each do |game|
       game_count += 1
-      if (game[:hoa] == "away" && game[:result] == "WIN") || (game[:hoa] == "home" && game[:result] == "LOSS")
+      if game[:home_goals].to_i < game[:away_goals].to_i
         wins += 1
       end
     end
     percentage = wins / game_count.to_f
-    percentage = percentage * 100
     percentage = percentage.round(2)
   end
 
@@ -57,7 +55,7 @@ class Game
         games += 1
       end
     end
-    ties.to_f / (games + ties)
+    (ties.to_f / (games + ties)).round(2)
   end
 
   def count_of_games_by_season
@@ -78,7 +76,7 @@ class Game
       goals_sum = game[:away_goals].to_i + game[:home_goals].to_i
       goals << goals_sum
     end
-    goals.sum / goals.length.to_f
+    (goals.sum / goals.length.to_f).round(2)
   end
 
   def count_of_goals_by_season
